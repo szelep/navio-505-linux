@@ -333,6 +333,13 @@ sprawdzono na sprzęcie w późniejszym buildzie. Handoff i `init` kompilują
 się do identycznych plików binarnych. Samego obrazu 1.0 nie uruchamiano
 jeszcze na sprzęcie. Krok 5 pozwala sprawdzić go bezpiecznie.
 
+## Autorzy
+
+Autor: Konrad Szelepusta. Port powstał we współpracy z
+[Claude](https://claude.ai) (Anthropic). Asystent AI pomagał w analizie
+firmware, pisaniu kodu, testach i dokumentacji. Próby na urządzeniu
+wykonywano na prawdziwym Navio 505.
+
 ## Licencja
 
 Kod jądra (`kernel/`) jest objęty licencją GPL-2.0-only
