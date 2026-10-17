@@ -1,0 +1,30 @@
+name: build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  image:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Host packages
+        run: sudo apt-get update && sudo apt-get install -y build-essential flex bison bc patch xz-utils bzip2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Python test dependencies
+        run: pip install -r requirements-dev.txt
+      - name: Cache downloads
+        uses: actions/cache@v4
+        with:
+          path: downloads
+          key: downloads-${{ hashFiles('scripts/common.py') }}
+      - run: make fetch
+      - run: make
+      - run: make test
+      - uses: actions/upload-artifact@v4
+        with:
+          name: navio505-linux
+          path: out/

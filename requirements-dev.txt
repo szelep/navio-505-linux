@@ -1,0 +1,2 @@
+# Offline emulator tests (tests/test-offline.py)
+unicorn>=2.1,<3

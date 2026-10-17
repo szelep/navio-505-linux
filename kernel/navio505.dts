@@ -1,0 +1,51 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/dts-v1/;
+/ {
+	model = "GoClever Navio 505 (MStar MSB2521 U03)";
+	compatible = "goclever,navio505", "mstar,msb2521";
+	#address-cells = <1>;
+	#size-cells = <1>;
+	interrupt-parent = <&intc>;
+	aliases { serial0 = &uart0; };
+	chosen {
+		stdout-path = "serial0";
+		bootargs = "earlycon keep_bootcon console=tty1 console=ttyS0,115200n8 fbcon=font:VGA8x16 consoleblank=0 ignore_loglevel loglevel=8 clk_ignore_unused rdinit=/init panic=0 lpj=1600000";
+	};
+	/* First 4 MiB excluded: includes the live EBOOT LCD framebuffer. */
+	memory@20400000 { device_type = "memory"; reg = <0x20400000 0x07c00000>; };
+	/* Scanout left running by EBOOT 0.1104 LCD init 0x83e141ac:
+	 * GOP 0xa0006a00 bank 4 base 0x20000 x 8 B = MIU 0x100000,
+	 * pitch 0x78 x 8 B, 0x110 lines; EBOOT clears 0x3fc00 bytes there.
+	 * Linux only draws into it; no LCD, clock or backlight registers.
+	 */
+	framebuffer@20100000 {
+		compatible = "simple-framebuffer";
+		reg = <0x20100000 0x0003fc00>;
+		width = <480>;
+		height = <272>;
+		stride = <960>;
+		format = "r5g6b5";
+	};
+	cpus {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		cpu@0 { device_type = "cpu"; compatible = "arm,arm926ej-s"; reg = <0>; };
+	};
+	intc: interrupt-controller@a0005600 {
+		compatible = "mstar,msb2521-intc";
+		reg = <0xa0005600 0x100>;
+		interrupt-controller;
+		#interrupt-cells = <1>;
+		#address-cells = <0>;
+	};
+	uart0: serial@a0007600 {
+		compatible = "ns16550a";
+		reg = <0xa0007600 0x100>;
+		reg-shift = <3>;
+		reg-io-width = <1>;
+		/* Updated from EBOOT clock strap before platform-device creation. */
+		clock-frequency = <16369000>;
+		current-speed = <115200>;
+		/* Initial serial console uses the 8250 polling fallback, no RX IRQ. */
+	};
+};

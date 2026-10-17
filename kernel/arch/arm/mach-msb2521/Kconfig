@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: GPL-2.0-only
+config ARCH_MSB2521
+	bool "MStar MSB2521 (GoClever Navio 505)"
+	depends on ARCH_MULTI_V5
+	select CPU_ARM926T
+	select CLKSRC_MMIO
+	help
+	  Support for the GoClever Navio 505 PND (MStar MSB2521 U03,
+	  ARM926EJ-S). Relies on DRAM, clocks and the LCD scanout set up by
+	  the vendor EBOOT. Provides IRQ controller, timers, UART0 console,
+	  simple-framebuffer LCD and the Power key. No NAND or SD driver.
