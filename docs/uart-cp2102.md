@@ -15,6 +15,12 @@ pracujący w logice **3,3 V**.
                                             3V3 / 5V  ── NIE podłączaj
 ```
 
+![Adapter CP2102: RXD, TXD i GND do Navio; +5V, 3V3 i DTR wolne](images/uart-adapter-cp2102.jpg)
+
+Na zdjęciu typowy moduł CP2102 z wyprowadzeniami DTR, RXD, TXD, +5V, GND
+i 3V3. Podłączasz tylko **RXD, TXD i GND**
+([zdjęcie bez opisów](images/uart-adapter-photo.jpg)).
+
 - TX i RX są **skrzyżowane**, a masa jest wspólna.
 - Nie zasilaj nawigacji z adaptera. Pin VCC/3V3/5V zostaw wolny.
 - Linie I/O Navio pracują przy około 2,9 V (domena `VDD_VPER1` MSB2521).

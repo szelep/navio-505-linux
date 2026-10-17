@@ -93,6 +93,7 @@ Trzy pady UART0 (GND, TX0, RX0) są na prawej krawędzi płyty głównej, obok
 złącza taśmy FPC:
 
 <img src="docs/images/uart-pads-zoom.jpg" alt="Pady UART0: GND, TX0, RX0" width="520">
+<img src="docs/images/uart-adapter-cp2102.jpg" alt="Adapter CP2102: RXD, TXD, GND" width="420">
 
 TX0 podłącz do RXD adaptera, RX0 do TXD (najlepiej przez 1 kΩ), a GND do GND.
 Pinu zasilania adaptera nie podłączaj. Szczegóły i pomiar kontrolny:
@@ -335,7 +336,7 @@ jeszcze na sprzęcie. Krok 5 pozwala sprawdzić go bezpiecznie.
 
 ## Autorzy
 
-Autor: Konrad Szelepusta. Port powstał we współpracy z
+Port powstał we współpracy z
 [Claude](https://claude.ai) (Anthropic). Asystent AI pomagał w analizie
 firmware, pisaniu kodu, testach i dokumentacji. Próby na urządzeniu
 wykonywano na prawdziwym Navio 505.
